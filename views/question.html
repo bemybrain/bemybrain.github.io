@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8">
+      <ol class="breadcrumb">
+        <li><a ui-sref="main.home">Home</a></li>
+        <li><a ui-sref="main.questions">Perguntas</a></li>
+        <li class="active">{{ question.title }}</li>
+      </ol>
+
+      <!-- Title -->
+      <article class="main-section question-detail">
+        <p><i class="glyphicon glyphicon-user" width="60px" height="60px" href="#"></i> {{ question.author.name || question.author.username || 'Usuário' }} - <i class="glyphicon glyphicon-time"></i> {{ question.date | date : 'dd MMM yyyy, h:mm a' }}</p>
+        <h2>{{ question.title }}</h2>
+        <br>
+        <div class="question-body">
+          {{ question.body }}
+        </div>
+        <br>
+        <ul class="list-inline" ng-if="question.tags.length">
+          <li>Tags:</li>
+          <li ng-repeat="tag in question.tags"><span class="label label-default">{{ tag.name }}</span></li>
+        </ul>
+      </article>
+
+      <hr>
+
+      <!-- Comment -->
+      <div class="answer-list" ng-if="answers.length">
+        <h3>Melhores respostas:</h3>
+        <div class="panel panel-default media" ng-repeat="answer in answers | orderBy : date : true">
+          <div class="panel-body">
+            <a class="pull-left" href="#">
+              <img src="images\beMyBrainLogo.png" width="64px" height="64px"></img>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading">{{ answer.author.name || answer.author.username || 'Usuário' }}<small> Postado em {{ answer.date | date : 'dd MMM yyyy, h:mm a' }}</small></h4>
+              {{ answer.body }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info" ng-if="answers.length === 0">Ninguém respondeu ainda!</div>
+
+      <hr>
+
+      <!-- Comments Form -->
+      <div class="new-answer" ng-if="isLoggedIn()">
+        <h3>Nova Resposta:</h3>
+        <div class="form-group">
+          <textarea class="form-control" ng-model="newAnswer.body" rows="5" placeholder="Sabe a resposta?"></textarea>
+        </div>
+        <button type="button" ng-click="sendAnswer()" class="btn btn-success">Enviar</button>
+      </div>
+
+      <hr>
+
+    </div>
+
+    <!-- Blog Sidebar Widgets Column -->
+    <div class="col-md-4" ng-include="'/views/partials/sidebar.html'"></div>
+
+  </div>
