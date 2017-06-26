@@ -16,7 +16,7 @@
 
 
 					<!-- ESPECIALIZATION PROFILE-->
-				<section class="especialization-profile" style="margin-top: 50px;" ng-if="dashboard && dashboard.rank">
+				<section class="especialization-profile" style="margin-top: 50px;" ng-if="dashboard && !!dashboard.rank">
 					<!-- MEDAL SECTION -->
 					<div class="row medal">
             <!-- MEDAL NAME -->
@@ -59,7 +59,7 @@
 			</section>
 		</aside>
 
-		<div class="col-lg-6">
+		<div class="col-lg-6" ng-if="chart.data">
 			<div class="titulo-do-chart">
 				<h3>Seu desempenho</h3>
 				<hr>
